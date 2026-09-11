@@ -1,36 +1,37 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends Admin_Controller
-{
+class Dashboard extends Admin_Controller {
+  // Define Role & Builder & Model
+  protected $role;
+  public function __construct(){
+    parent::__construct();
+    $this->role = 'dashboard';
+    $this->load->model('dashboard_model');
+  }
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('dashboard_model');
-    }
-
-    public function index()
-    {
-        $this->data['patient_fees_summary'] = $this->dashboard_model->get_monthly_patient_fees();
-        $this->data['yearly_income_expense'] = $this->dashboard_model->get_income_vs_expense();
-        $this->data['get_today_invoice_qty'] = $this->dashboard_model->get_today_invoice_qty();
-        $this->data['get_today_commission'] = $this->dashboard_model->get_today_commission();
-        $this->data['get_today_incomeandexpense'] = $this->dashboard_model->get_today_incomeandexpense();
-        $this->data['get_total_patient'] = $this->dashboard_model->get_total_patient();
-        $this->data['get_total_doctor'] = $this->dashboard_model->get_total_doctor();
-        $this->data['get_total_staff'] = $this->dashboard_model->get_total_staff();
-        $this->data['get_total_appointment'] = $this->dashboard_model->get_total_appointment();
-        $this->data['get_monthly_appointment'] = $this->dashboard_model->get_monthly_appointment();
-        $this->data['headerelements'] = array(
-            'js' => array(
-                'vendor/chartjs/chart.min.js',
-                'vendor/chartjs/utils.js',
-            ),
-        );
-        $this->data['title'] = translate('dashboard');
-        $this->data['sub_page'] = 'dashboard/index';
-        $this->data['main_menu'] = 'dashboard';
-        $this->load->view('layout/index', $this->data);
-    }
+  public function index(){
+    // Pengeluaran Liquid Oxygen I
+    $this->data['liquidtu'] = elaborator($this->dashboard_model->monthlyReport('1'));
+    // Pengeluaran Liquid Oxygen II
+    $this->data['liquidwa'] = elaborator($this->dashboard_model->monthlyReport('2'));
+    // Data Pengeluaran Oxygen
+    $this->data['oxygen'] = elaborator($this->dashboard_model->monthlyReport('3'));
+    // Data Pengeluaran Nitroxide
+    $this->data['nitroxide'] = elaborator($this->dashboard_model->monthlyReport('4'));
+    // Data Pengeluaran Cardioxide
+    $this->data['cardioxide'] = elaborator($this->dashboard_model->monthlyReport('5'));
+    // Data Pengeluaran Argon
+    $this->data['argon'] = elaborator($this->dashboard_model->monthlyReport('6'));
+    // Data Pengeluaran Nitrocair
+    $this->data['nitrocair'] = elaborator($this->dashboard_model->monthlyReport('7'));
+    // Data Pengeluaran Carbomix
+    $this->data['carbomix'] = elaborator($this->dashboard_model->monthlyReport('8'));
+    // File
+    $this->data['title'] = 'Panel Dashboard';
+    $this->data['sub_page'] = 'dashboard/index';
+    $this->data['main_menu'] = 'dashboard';
+    $this->load->view('layout/index', $this->data);
+  }
 }
+
+?>

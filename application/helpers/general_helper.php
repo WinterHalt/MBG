@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+function elaborator($data) { return json_encode($data); }
+
 function realtime($time = false) {
     // real time
     return date($time ? 'Y-m-d H:i:s' : 'Y-m-d');

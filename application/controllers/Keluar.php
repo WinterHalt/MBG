@@ -4,16 +4,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Keluar extends Admin_Controller {
   // Define Role & Builder & Model
-  protected $role;
   public function __construct(){
     parent::__construct();
-    $this->role = 'keluar';
     $this->load->model(array('keluar_model', 'barang_model'));
   }
 
   public function index(){
     // Controller Tabel History Barang Keluar
-    if (!get_permission($this->role, 'is_view')){
+    if (!get_permission('keluar', 'is_view')){
       access_denied();
     }
     // File
@@ -25,7 +23,7 @@ class Keluar extends Admin_Controller {
 
   public function historia(){
     // Tabel Historia on Keluar Gas Medis
-    if (!get_permission($this->role, 'is_view')) {
+    if (!get_permission('keluar', 'is_view')) {
       access_denied();
     }
     // Variable Awal
@@ -40,7 +38,7 @@ class Keluar extends Admin_Controller {
 
   public function insert(){
     // Controller u Melakukan Input Barang Keluar
-    if (!get_permission($this->role, 'is_add')){
+    if (!get_permission('keluar', 'is_add')){
       access_denied();
     }
     // File
@@ -52,7 +50,7 @@ class Keluar extends Admin_Controller {
 
   public function publish(){
     // Controller u Melakukan Publish Dari Modal Input
-    if (!get_permission($this->role, 'is_add')) {
+    if (!get_permission('keluar', 'is_add')) {
       access_denied();
     }
     // Variable Input
@@ -93,7 +91,7 @@ class Keluar extends Admin_Controller {
 
   public function detail($id){
     // Controller u Melakukann Edit Data Keluar
-    if (!get_permission($this->role, 'is_view')){
+    if (!get_permission('keluar', 'is_view')){
       access_denied();
     }
     // File Model Primary

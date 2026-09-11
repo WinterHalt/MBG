@@ -1,7 +1,9 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-include_once APPPATH . '/libraries/phpjasperxml/PHPJasperXML.inc.php';
+// Ensure the path to the original vendor library is correct
+include_once APPPATH . 'libraries/phpjasperxml/PHPJasperXML.inc.php';
 
-class PHPJasperXML_lib extends PHPJasperXML {
-	
+// The class name must start with a capital letter and match the filename
+class Phpjasperxml_lib extends PHPJasperXML {
+    
 }
